@@ -1,0 +1,1309 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar" xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Font CSS (Via CDN) -->
+    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' />
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" type="text/css" href="/visitors/assets/skin/default_skin/css/theme.css" />
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" type="text/css" href="/visitors/vendor/plugins/magnific/magnific-popup.css" />
+    <!-- Admin Forms CSS -->
+    <link href="/visitors/assets/admin-tools/admin-forms/css/admin-forms.css" rel="stylesheet" />
+    <link href="/visitors/assets/fonts/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/visitors/vendor/Images/icon.png" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+      <!-- Theme Javascript -->
+  
+    <title>نظام الزوار</title>
+
+
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            overflow: auto;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        #silverlightControlHost {
+            z-index: auto;
+            height: 100%;
+            text-align: center;
+        }
+    </style>
+    <script src="/visitors/vendor/jquery/jquery-1.11.1.min.js"></script>
+    <script src="/visitors/vendor/jquery/jquery_ui/jquery-ui.min.js"></script>
+    <script src="/visitors/vendor/plugins/pnotify/pnotify.js"></script>
+      <script src="/visitors/assets/js/utility/utility.js"></script>
+
+    <%--<script type="text/javascript">
+        function onSilverlightError(sender, args) {
+            var appSource = "";
+            if (sender != null && sender != 0) {
+                appSource = sender.getHost().Source;
+            }
+
+            var errorType = args.ErrorType;
+            var iErrorCode = args.ErrorCode;
+
+            if (errorType == "ImageError" || errorType == "MediaError") {
+                return;
+            }
+
+            var errMsg = "Unhandled Error in Silverlight Application " + appSource + "\n";
+
+            errMsg += "Code: " + iErrorCode + "    \n";
+            errMsg += "Category: " + errorType + "       \n";
+            errMsg += "Message: " + args.ErrorMessage + "     \n";
+
+            if (errorType == "ParserError") {
+                errMsg += "File: " + args.xamlFile + "     \n";
+                errMsg += "Line: " + args.lineNumber + "     \n";
+                errMsg += "Position: " + args.charPosition + "     \n";
+            }
+            else if (errorType == "RuntimeError") {
+                if (args.lineNumber != 0) {
+                    errMsg += "Line: " + args.lineNumber + "     \n";
+                    errMsg += "Position: " + args.charPosition + "     \n";
+                }
+                errMsg += "MethodName: " + args.methodName + "     \n";
+            }
+
+            throw new Error(errMsg);
+        }
+    </script>--%>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="dashboard-page sb-l-o sb-r-c">
+
+
+    <!-------------------------------------------------------------+ 
+  <body> Helper Classes: 
+---------------------------------------------------------------+ 
+  '.sb-l-o' - Sets Left Sidebar to "open"
+  '.sb-l-m' - Sets Left Sidebar to "minified"
+  '.sb-l-c' - Sets Left Sidebar to "closed"
+
+  '.sb-r-o' - Sets Right Sidebar to "open"
+  '.sb-r-c' - Sets Right Sidebar to "closed"
+---------------------------------------------------------------+
+ Example: <body class="example-page sb-l-o sb-r-c">
+ Results: Sidebar left Open, Sidebar right Closed
+--------------------------------------------------------------->
+    <div id="main">
+        <!-----------------------------------------------------------------+ 
+       ".navbar" Helper Classes: 
+    -------------------------------------------------------------------+ 
+       * Positioning Classes: 
+        '.navbar-static-top' - Static top positioned navbar
+        '.navbar-static-top' - Fixed top positioned navbar
+
+       * Available Skin Classes:
+         .bg-dark    .bg-primary   .bg-success   
+         .bg-info    .bg-warning   .bg-danger
+         .bg-alert   .bg-system 
+    -------------------------------------------------------------------+
+      Example: <header class="navbar navbar-fixed-top bg-primary">
+      Results: Fixed top navbar with blue background 
+    ------------------------------------------------------------------->
+
+        <!-- Start: Header -->
+        <header class="navbar navbar-fixed-top" style="display: flex">
+
+            <div class="navbar-branding">
+
+                <a class="navbar-brand" href="dashboard.html">
+
+                    <img src="/visitors/vendor/Images/ICON2.png" />
+                </a>
+
+                <span id="toggle_sidemenu_l" class="ad ad-lines"></span>
+            </div>
+        </header>
+        <!-- End: Header -->
+
+
+
+        <!-- Start: Sidebar Left -->
+        <aside id="sidebar_left" class="nano nano-primary affix">
+
+            <!-- Start: Sidebar Left Content -->
+            <div class="sidebar-left-content nano-content">
+
+                <!-- Start: Sidebar Header -->
+                <header class="sidebar-header">
+                    <!-- Sidebar Widget - Author (hidden)  -->
+                    <div class="sidebar-widget author-widget ">
+                        <div class="media">
+                            <a class="media-left" href="#">
+                                <img src="/visitors/assets/img/avatars/3.jpg" class="img-responsive">
+                            </a>
+                            <div class="media-body">
+                                <div class="media-links">
+                                    <a href="/visitors/Login.aspx?logout=true">تسجيل الخروج</a>
+                                </div>
+                                <div class="media-author" runat="server" id="spnUserName"></div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <!-- End: Sidebar Header -->
+
+                <!-- Start: Sidebar Left Menu -->
+                <ul class="nav sidebar-menu">
+                    <li class="sidebar-label pt20">الزوار</li>
+                   <%-- <li>
+                        <a href="/visitors/vistors/vistorsAdd.aspx">
+                            <span class="fa fa-user-plus"></span>
+                            <span class="sidebar-title">إضافة زائر جديد</span>
+                        </a>
+                    </li>--%>
+                     <li>
+                        <a href="/visitors/vistors/vistorsCheck.aspx">
+                            <span class="fa fa-user-plus"></span>
+                            <span class="sidebar-title">التحقق من موعد زائر</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/visitors/vistors/vistorsLogOut.aspx">
+                            <span class="fa fa-user-times"></span>
+                            <span class="sidebar-title">تسجيل خروج الزوار</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/visitors/vistors/CheckIn.aspx">
+                            <span class="fa fa-group"></span>
+                            <span class="sidebar-title">تسجيل دخول / خروج الزوار</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/visitors/vistors/vistorsearch.aspx">
+                            <span class="fa fa-search"></span>
+                            <span class="sidebar-title">استعلم عن زائر</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/visitors/vistors/vistorsTracking.aspx">
+                            <span class="fa fa-search-plus"></span>
+                            <span class="sidebar-title">استعلم عن الزوار</span>
+                        </a>
+                    </li>
+                    <li id="liGroup" runat="server">
+                        <a href="/visitors/vistors/Group.aspx">
+                            <span class="fa fa-files-o"></span>
+                            <span class="sidebar-title">الجلسات الجماعية </span>
+                        </a>
+                    </li>
+                    <li class="sidebar-label pt15" id="liEmpHeader" runat="server">الموظفين</li>
+                    <li id="liEmp" runat="server">
+                        <a href="/visitors/Users/UsersManagment.aspx">
+                            <span class="fa fa-id-card"></span>
+                            <span class="sidebar-title">إدارة الموظفين </span>
+                        </a>
+                    </li>
+                    <li class="sidebar-label pt15" id="liReportsHeader" runat="server">التقارير</li>
+                    <li id="liDailyReport" runat="server">
+                        <a href="/visitors/Reports/vistorsDailyReport.aspx">
+                            <span class="fa fa-file-o"></span>
+                            <span class="sidebar-title">إحصائية الزوار يومي </span>
+                        </a>
+                    </li>
+                    <li id="liWeeklyReport" runat="server">
+                        <a href="/visitors/Reports/vistorsWeeklyReport.aspx">
+                            <span class="fa fa-file-text-o"></span>
+                            <span class="sidebar-title">إحصائية الزوار إسبوعي </span>
+                        </a>
+                    </li>
+                    <li id="liMonthlyReport" runat="server">
+                        <a href="   /visitors/Reports/vistorsMonthlyReport.aspx">
+                            <span class="fa fa-files-o"></span>
+                            <span class="sidebar-title">إحصائية الزوار شهري </span>
+                        </a>
+                    </li>
+                   
+
+                </ul>
+                <!-- End: Sidebar Menu -->
+
+                <!-- Start: Sidebar Collapse Button -->
+                <div class="sidebar-toggle-mini">
+                    <a href="#">
+                        <span class="fa fa-sign-out"></span>
+                    </a>
+                </div>
+                <!-- End: Sidebar Collapse Button -->
+
+            </div>
+            <!-- End: Sidebar Left Content -->
+
+        </aside>
+        <!-- End: Sidebar Left -->
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+
+
+
+        <!-- BEGIN: PAGE SCRIPTS -->
+    </div>
+
+    <!-- jQuery -->
+    <script src="/visitors/vendor/jquery/jquery-1.11.1.min.js"></script>
+    <script src="/visitors/vendor/jquery/jquery_ui/jquery-ui.min.js"></script>
+
+    <!-- HighCharts Plugin -->
+    <script src="/visitors/vendor/plugins/highcharts/highcharts.js"></script>
+
+    <!-- Sparklines Plugin -->
+    <script src="/visitors/vendor/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- Simple Circles Plugin -->
+    <script src="/visitors/vendor/plugins/circles/circles.js"></script>
+
+    <!-- JvectorMap Plugin + US Map (more maps in plugin//assets folder) -->
+    <script src="/visitors/vendor/plugins/jvectormap/jquery.jvectormap.min.js"></script>
+    <script src="/visitors/vendor/plugins/jvectormap//assets/jquery-jvectormap-us-lcc-en.js"></script>
+
+  
+    <script src="/visitors/assets/js/demo/demo.js"></script>
+    <script src="/visitors/assets/js/main.js"></script>
+
+    <!-- Page Plugins -->
+    <script src="/visitors/assets/admin-tools/admin-forms/js/jquery.validate.min.js"></script>
+    <script src="/visitors/assets/admin-tools/admin-forms/js/jquery.steps.min.js"></script>
+
+    <!-- Widget Javascript -->
+    <script src="/visitors/assets/js/demo/widgets.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+
+            "use strict";
+
+            // Init Theme Core      
+            Core.init();
+
+            // Init Demo JS
+            Demo.init();
+
+            // Init Widget Demo JS
+            // demoHighCharts.init();
+
+            // Because we are using Admin Panels we use the OnFinish 
+            // callback to activate the demoWidgets. It's smoother if
+            // we let the panels be moved and organized before 
+            // filling them with content from various plugins
+
+            // Init plugins used on this page
+            // HighCharts, JvectorMap, Admin Panels
+
+            // Init Admin Panels on widgets inside the ".admin-panels" container
+            $('.admin-panels').adminpanel({
+                grid: '.admin-grid',
+                draggable: true,
+                preserveGrid: true,
+                mobile: false,
+                onStart: function () {
+                    // Do something before AdminPanels runs
+                },
+                onFinish: function () {
+                    $('.admin-panels').addClass('animated fadeIn').removeClass('fade-onload');
+
+                    // Init the rest of the plugins now that the panels
+                    // have had a chance to be moved and organized.
+                    // It's less taxing to organize empty panels
+                    demoHighCharts.init();
+                    runVectorMaps(); // function below
+                },
+                onSave: function () {
+                    $(window).trigger('resize');
+                }
+            });
+
+            // Widget VectorMap
+            function runVectorMaps() {
+
+                // Jvector Map Plugin
+                var runJvectorMap = function () {
+                    // Data set
+                    var mapData = [900, 700, 350, 500];
+                    // Init Jvector Map
+                    $('#WidgetMap').vectorMap({
+                        map: 'us_lcc_en',
+                        //regionsSelectable: true,
+                        backgroundColor: 'transparent',
+                        series: {
+                            markers: [{
+                                attribute: 'r',
+                                scale: [3, 7],
+                                values: mapData
+                            }]
+                        },
+                        regionStyle: {
+                            initial: {
+                                fill: '#E5E5E5'
+                            },
+                            hover: {
+                                "fill-opacity": 0.3
+                            }
+                        },
+                        markers: [{
+                            latLng: [37.78, -122.41],
+                            name: 'San Francisco,CA'
+                        }, {
+                            latLng: [36.73, -103.98],
+                            name: 'Texas,TX'
+                        }, {
+                            latLng: [38.62, -90.19],
+                            name: 'St. Louis,MO'
+                        }, {
+                            latLng: [40.67, -73.94],
+                            name: 'New York City,NY'
+                        }],
+                        markerStyle: {
+                            initial: {
+                                fill: '#a288d5',
+                                stroke: '#b49ae0',
+                                "fill-opacity": 1,
+                                "stroke-width": 10,
+                                "stroke-opacity": 0.3,
+                                r: 3
+                            },
+                            hover: {
+                                stroke: 'black',
+                                "stroke-width": 2
+                            },
+                            selected: {
+                                fill: 'blue'
+                            },
+                            selectedHover: {}
+                        },
+                    });
+                    // Manual code to alter the Vector map plugin to 
+                    // allow for individual coloring of countries
+                    var states = ['US-CA', 'US-TX', 'US-MO',
+                        'US-NY'
+                    ];
+                    var colors = [bgWarningLr, bgPrimaryLr, bgInfoLr, bgAlertLr];
+                    var colors2 = [bgWarning, bgPrimary, bgInfo, bgAlert];
+                    $.each(states, function (i, e) {
+                        $("#WidgetMap path[data-code=" + e + "]").css({
+                            fill: colors[i]
+                        });
+                    });
+                    $('#WidgetMap').find('.jvectormap-marker')
+                        .each(function (i, e) {
+                            $(e).css({
+                                fill: colors2[i],
+                                stroke: colors2[i]
+                            });
+                        });
+                }
+
+                if ($('#WidgetMap').length) {
+                    runJvectorMap();
+                }
+            }
+
+
+
+        });
+
+    </script>
+
+    <script src="/visitors/assets/Calenders/jquery.plugin.js"></script>
+    <!--<script src="jquery.calendars.all.js"></script><!-- Use instead of calendars, plus, and picker below -->
+    <script src="/visitors/assets/Calenders/jquery.calendars.js"></script>
+    <script src="/visitors/assets/Calenders/jquery.calendars.plus.js"></script>
+    <script src="/visitors/assets/Calenders/jquery.calendars.picker.js"></script>
+    <!--<script src="jquery.calendars.picker.ext.js"></script><!-- Include for ThemeRoller styling -->
+    <script src="/visitors/assets/Calenders/jquery.calendars.ummalqura.js"></script>
+    <script src="/visitors/assets/Calenders/jquery.calendars.ummalqura-ar.js"></script>
+    <link href="/visitors/assets/Calenders/jquery.calendars.picker.css" rel="stylesheet" />
+    <!-- jQuery Validate Plugin-->
+    <script src="/visitors/assets/admin-tools/admin-forms/js/jquery.validate.min.js"></script>
+
+    <!-- jQuery Validate Addon -->
+    <script src="/visitors/assets/admin-tools/admin-forms/js/additional-methods.min.js"></script>
+    <!-- Typeahead Plugin -->
+    <script src="/visitors/vendor/plugins/typeahead/typeahead.bundle.min.js"></script>
+    <!-- END: PAGE SCRIPTS -->
+    <!-- Theme Javascript -->
+    <script src="/visitors/assets/js/utility/utility.js"></script>
+    <script src="/visitors/assets/js/demo/demo.js"></script>
+    <script src="/visitors/assets/js/main.js"></script>
+    <script src="/visitors/vendor/plugins/magnific/jquery.magnific-popup.js"></script>
+  <!-- FileUpload JS -->
+  <script src="/visitors/vendor/plugins/holder/holder.min.js"></script>
+    <style>
+        /*demo button styles*/
+        .contextual-demo a {
+            padding: 9px 4px;
+            width: 9.5%;
+        }
+
+            .contextual-demo a + a {
+                margin-left: 0.5%;
+            }
+
+        .contextual-demo-alt a {
+            padding: 9px 4px;
+            width: 15%;
+        }
+
+            .contextual-demo-alt a + a {
+                margin-left: 0.5%;
+            }
+
+        /*responsive demo button styles*/
+        @media(max-width: 800px) {
+            .contextual-demo a {
+                padding: 9px 4px;
+                width: 23%;
+            }
+
+                .contextual-demo a + a {
+                    margin-left: 0.5%;
+                }
+
+            .contextual-demo-alt a {
+                padding: 9px 4px;
+                width: 28%;
+            }
+
+                .contextual-demo-alt a + a {
+                    margin-left: 0.5%;
+                }
+        }
+
+        /* demo page styles */
+        body {
+            min-height: 2300px;
+        }
+
+        .content-header b,
+        .admin-form .panel.heading-border:before,
+        .admin-form .panel .heading-border:before {
+            transition: all 0.7s ease;
+        }
+        /* responsive demo styles */
+        @media (max-width: 800px) {
+            .admin-form .panel-body {
+                padding: 18px 12px;
+            }
+        }
+    </style>
+    <style>
+        /*page demo styles*/
+        .wizard .steps .fa,
+        .wizard .steps .glyphicon,
+        .wizard .steps .glyphicon {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+
+            "use strict";
+
+            // Init Theme Core    
+            Core.init();
+
+            // Init Demo JS     
+            Demo.init();
+
+            /* @custom validation method (smartCaptcha) 
+            ------------------------------------------------------------------ */
+
+            $.validator.methods.smartCaptcha = function (value, element, param) {
+                return value == param;
+            };
+
+            $("#adminform").validate({
+
+                /* @validation states + elements 
+                ------------------------------------------- */
+
+                errorClass: "state-error",
+                validClass: "state-success",
+                errorElement: "em",
+
+                /* @validation rules 
+                ------------------------------------------ */
+
+                rules: {
+                    ctl00$ContentPlaceHolder1$txtIDNum: {
+                        required: true,
+                        number: true
+                    },
+                    ctl00$ContentPlaceHolder1$txtName: {
+                        required: true
+                    },
+                    ctl00$ContentPlaceHolder1$txtUserName: {
+                        required: true
+                    },
+                    ctl00$ContentPlaceHolder1$ddlUsers: {
+                        required: true
+                    },
+                    ctl00$ContentPlaceHolder1$txtVistorID: {
+                        number: true
+                    },
+                    ctl00$ContentPlaceHolder1$txtSearchIDNum: {
+                        number: true
+                    },
+                    comment: {
+                        required: true,
+                        minlength: 30
+                    },
+                    mobile_phone: {
+                        require_from_group: [1, ".phone-group"]
+                    },
+                    home_phone: {
+                        require_from_group: [1, ".phone-group"]
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 16
+                    },
+                    repeatPassword: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 16,
+                        equalTo: '#password'
+                    },
+                    gender: {
+                        required: true
+                    },
+                    languages: {
+                        required: true
+                    },
+                    verification: {
+                        required: true,
+                        smartCaptcha: 19
+                    },
+                    applicant_age: {
+                        required: true,
+                        min: 16
+                    },
+                    licence_no: {
+                        required: function (element) {
+                            return $("#applicant_age").val() > 19;
+                        }
+                    },
+                    child_name: {
+                        required: "#parents:checked"
+                    }
+
+                },
+
+                /* @validation error messages 
+                ---------------------------------------------- */
+
+                messages: {
+                    ctl00$ContentPlaceHolder1$txtIDNum: {
+                        required: 'من فضلك ادخل رقم الهوية',
+                        number: 'من فضلك ادخل رقم هوية صحيح'
+                    },
+                    ctl00$ContentPlaceHolder1$txtName: {
+                        required: 'من فضلك ادخل الإسم الثلاثي'
+                    },
+                    ctl00$ContentPlaceHolder1$txtUserName: {
+                        required: 'من فضلك ادخل اسم الموظف'
+                    },
+                    ctl00$ContentPlaceHolder1$ddlUsers: {
+                        required: 'من فضلك اختر موظف'
+                    },
+                    ctl00$ContentPlaceHolder1$txtVistorID: {
+                        number: 'من فضلك ادخل رقم زائر صحيح'
+                    },
+                    ctl00$ContentPlaceHolder1$txtSearchIDNum: {
+                        number: 'من فضلك ادخل رقم هوية صحيح'
+                    },
+                    comment: {
+                        required: 'Oops you forgot to comment',
+                        minlength: 'Enter at least 30 characters or more'
+                    },
+                    mobile_phone: {
+                        require_from_group: 'Fill at least a mobile contact'
+                    },
+                    home_phone: {
+                        require_from_group: 'Fill at least a home contact'
+                    },
+                    password: {
+                        required: 'Please enter a password'
+                    },
+                    repeatPassword: {
+                        required: 'Please repeat the above password',
+                        equalTo: 'Password mismatch detected'
+                    },
+                    gender: {
+                        required: 'Please choose specie'
+                    },
+                    languages: {
+                        required: 'Select laguages spoken'
+                    },
+                    verification: {
+                        required: 'Please enter verification code',
+                        smartCaptcha: 'Oops - enter a correct verification code'
+                    },
+                    applicant_age: {
+                        required: 'Enter applicant age',
+                        min: 'Must be 16 years and above'
+                    },
+                    licence_no: {
+                        required: 'Enter licence number'
+                    },
+                    child_name: {
+                        required: 'Please enter your childs name'
+                    }
+
+                },
+
+                /* @validation highlighting + error placement  
+                ---------------------------------------------------- */
+
+                highlight: function (element, errorClass, validClass) {
+                    $(element).closest('.field').addClass(errorClass).removeClass(validClass);
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).closest('.field').removeClass(errorClass).addClass(validClass);
+
+                },
+                errorPlacement: function (error, element) {
+                    if (element.is(":radio") || element.is(":checkbox")) {
+                        element.closest('.option-group').after(error);
+                    } else {
+                        error.insertAfter(element.parent());
+                    }
+                }
+
+            });
+
+
+            // Cache several DOM elements
+            var pageHeader = $('.content-header').find('b');
+            var adminForm = $('.admin-form');
+            var options = adminForm.find('.option');
+            var switches = adminForm.find('.switch');
+            var buttons = adminForm.find('.button');
+            var Panel = adminForm.find('.panel');
+            // Form Skin Switcher
+            $('#skin-switcher a').on('click', function () {
+                var btnData = $(this).data('form-skin');
+
+                $('#skin-switcher a').removeClass('item-active');
+                $(this).addClass('item-active')
+
+                adminForm.each(function (i, e) {
+                    var skins = 'theme-primary theme-info theme-success theme-warning theme-danger theme-alert theme-system theme-dark'
+                    var panelSkins = 'panel-primary panel-info panel-success panel-warning panel-danger panel-alert panel-system panel-dark'
+                    $(e).removeClass(skins).addClass('theme-' + btnData);
+                    Panel.removeClass(panelSkins).addClass('panel-' + btnData);
+                    pageHeader.removeClass().addClass('text-' + btnData);
+                });
+
+                $(options).each(function (i, e) {
+                    if ($(e).hasClass('block')) {
+                        $(e).removeClass().addClass('block mt15 option option-' + btnData);
+                    } else {
+                        $(e).removeClass().addClass('option option-' + btnData);
+                    }
+                });
+
+                // var sliders = $('.ui-timepicker-div', adminForm).find('.ui-slider');
+                $('body').find('.ui-slider').each(function (i, e) {
+                    $(e).addClass('slider-primary');
+                });
+
+                $(switches).each(function (i, ele) {
+                    if ($(ele).hasClass('switch-round')) {
+                        if ($(ele).hasClass('block')) {
+                            $(ele).removeClass().addClass('block mt15 switch switch-round switch-' + btnData);
+                        } else {
+                            $(ele).removeClass().addClass('switch switch-round switch-' + btnData);
+                        }
+                    } else {
+                        if ($(ele).hasClass('block')) {
+                            $(ele).removeClass().addClass('block mt15 switch switch-' + btnData);
+                        } else {
+                            $(ele).removeClass().addClass('switch switch-' + btnData);
+                        }
+                    }
+
+                });
+                buttons.removeClass().addClass('button btn-' + btnData);
+            });
+
+            setTimeout(function () {
+                adminForm.addClass('theme-primary');
+                Panel.addClass('panel-primary');
+                pageHeader.addClass('text-primary');
+
+                $(options).each(function (i, e) {
+                    if ($(e).hasClass('block')) {
+                        $(e).removeClass().addClass('block mt15 option option-primary');
+                    } else {
+                        $(e).removeClass().addClass('option option-primary');
+                    }
+                });
+
+                // var sliders = $('.ui-timepicker-div', adminForm).find('.ui-slider');
+                $('body').find('.ui-slider').each(function (i, e) {
+                    $(e).addClass('slider-primary');
+                });
+
+                $(switches).each(function (i, ele) {
+                    if ($(ele).hasClass('switch-round')) {
+                        if ($(ele).hasClass('block')) {
+                            $(ele).removeClass().addClass('block mt15 switch switch-round switch-primary');
+                        } else {
+                            $(ele).removeClass().addClass('switch switch-round switch-primary');
+                        }
+                    } else {
+                        if ($(ele).hasClass('block')) {
+                            $(ele).removeClass().addClass('block mt15 switch switch-primary');
+                        } else {
+                            $(ele).removeClass().addClass('switch switch-primary');
+                        }
+                    }
+                });
+                buttons.removeClass().addClass('button btn-primary');
+            }, 800);
+
+
+
+        });
+        $(".vali").click(function () {
+
+            "use strict";
+
+            // Init Theme Core    
+            Core.init();
+
+            // Init Demo JS     
+            Demo.init();
+
+            /* @custom validation method (smartCaptcha) 
+            ------------------------------------------------------------------ */
+
+            $.validator.methods.smartCaptcha = function (value, element, param) {
+                return value == param;
+            };
+
+            $("#adminform").validate({
+
+                /* @validation states + elements 
+                ------------------------------------------- */
+
+                errorClass: "state-error",
+                validClass: "state-success",
+                errorElement: "em",
+
+                /* @validation rules 
+                ------------------------------------------ */
+
+                rules: {
+                    ctl00$ContentPlaceHolder1$txtIDNum: {
+                        required: true,
+                        number: true
+                    },
+                    ctl00$ContentPlaceHolder1$txtName: {
+                        required: true
+                    },
+                    ctl00$ContentPlaceHolder1$txtUserName: {
+                        required: true
+                    },
+                    ctl00$ContentPlaceHolder1$ddlUsers: {
+                        required: true
+                    },
+                    ctl00$ContentPlaceHolder1$txtVistorID: {
+                        number: true
+                    },
+                    comment: {
+                        required: true,
+                        minlength: 30
+                    },
+                    mobile_phone: {
+                        require_from_group: [1, ".phone-group"]
+                    },
+                    home_phone: {
+                        require_from_group: [1, ".phone-group"]
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 16
+                    },
+                    repeatPassword: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 16,
+                        equalTo: '#password'
+                    },
+                    gender: {
+                        required: true
+                    },
+                    languages: {
+                        required: true
+                    },
+                    verification: {
+                        required: true,
+                        smartCaptcha: 19
+                    },
+                    applicant_age: {
+                        required: true,
+                        min: 16
+                    },
+                    licence_no: {
+                        required: function (element) {
+                            return $("#applicant_age").val() > 19;
+                        }
+                    },
+                    child_name: {
+                        required: "#parents:checked"
+                    }
+
+                },
+
+                /* @validation error messages 
+                ---------------------------------------------- */
+
+                messages: {
+                    ctl00$ContentPlaceHolder1$txtIDNum: {
+                        required: 'من فضلك ادخل رقم الهوية',
+                        number: 'من فضلك ادخل رقم هوية صحيح'
+                    },
+                    ctl00$ContentPlaceHolder1$txtName: {
+                        required: 'من فضلك ادخل الإسم الثلاثي'
+                    },
+                    ctl00$ContentPlaceHolder1$txtUserName: {
+                        required: 'من فضلك ادخل اسم الموظف'
+                    },
+                    ctl00$ContentPlaceHolder1$ddlUsers: {
+                        required: 'من فضلك اختر موظف'
+                    },
+                    ctl00$ContentPlaceHolder1$txtVistorID: {
+                        number: 'Please select a mobile platform'
+                    },
+                    comment: {
+                        required: 'Oops you forgot to comment',
+                        minlength: 'Enter at least 30 characters or more'
+                    },
+                    mobile_phone: {
+                        require_from_group: 'Fill at least a mobile contact'
+                    },
+                    home_phone: {
+                        require_from_group: 'Fill at least a home contact'
+                    },
+                    password: {
+                        required: 'Please enter a password'
+                    },
+                    repeatPassword: {
+                        required: 'Please repeat the above password',
+                        equalTo: 'Password mismatch detected'
+                    },
+                    gender: {
+                        required: 'Please choose specie'
+                    },
+                    languages: {
+                        required: 'Select laguages spoken'
+                    },
+                    verification: {
+                        required: 'Please enter verification code',
+                        smartCaptcha: 'Oops - enter a correct verification code'
+                    },
+                    applicant_age: {
+                        required: 'Enter applicant age',
+                        min: 'Must be 16 years and above'
+                    },
+                    licence_no: {
+                        required: 'Enter licence number'
+                    },
+                    child_name: {
+                        required: 'Please enter your childs name'
+                    }
+
+                },
+
+                /* @validation highlighting + error placement  
+                ---------------------------------------------------- */
+
+                highlight: function (element, errorClass, validClass) {
+                    $(element).closest('.field').addClass(errorClass).removeClass(validClass);
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).closest('.field').removeClass(errorClass).addClass(validClass);
+
+                },
+                errorPlacement: function (error, element) {
+                    if (element.is(":radio") || element.is(":checkbox")) {
+                        element.closest('.option-group').after(error);
+                    } else {
+                        error.insertAfter(element.parent());
+                    }
+                }
+
+            });
+
+
+            // Cache several DOM elements
+            var pageHeader = $('.content-header').find('b');
+            var adminForm = $('.admin-form');
+            var options = adminForm.find('.option');
+            var switches = adminForm.find('.switch');
+            var buttons = adminForm.find('.button');
+            var Panel = adminForm.find('.panel');
+            // Form Skin Switcher
+            $('#skin-switcher a').on('click', function () {
+                var btnData = $(this).data('form-skin');
+
+                $('#skin-switcher a').removeClass('item-active');
+                $(this).addClass('item-active')
+
+                adminForm.each(function (i, e) {
+                    var skins = 'theme-primary theme-info theme-success theme-warning theme-danger theme-alert theme-system theme-dark'
+                    var panelSkins = 'panel-primary panel-info panel-success panel-warning panel-danger panel-alert panel-system panel-dark'
+                    $(e).removeClass(skins).addClass('theme-' + btnData);
+                    Panel.removeClass(panelSkins).addClass('panel-' + btnData);
+                    pageHeader.removeClass().addClass('text-' + btnData);
+                });
+
+                $(options).each(function (i, e) {
+                    if ($(e).hasClass('block')) {
+                        $(e).removeClass().addClass('block mt15 option option-' + btnData);
+                    } else {
+                        $(e).removeClass().addClass('option option-' + btnData);
+                    }
+                });
+
+                // var sliders = $('.ui-timepicker-div', adminForm).find('.ui-slider');
+                $('body').find('.ui-slider').each(function (i, e) {
+                    $(e).addClass('slider-primary');
+                });
+
+                $(switches).each(function (i, ele) {
+                    if ($(ele).hasClass('switch-round')) {
+                        if ($(ele).hasClass('block')) {
+                            $(ele).removeClass().addClass('block mt15 switch switch-round switch-' + btnData);
+                        } else {
+                            $(ele).removeClass().addClass('switch switch-round switch-' + btnData);
+                        }
+                    } else {
+                        if ($(ele).hasClass('block')) {
+                            $(ele).removeClass().addClass('block mt15 switch switch-' + btnData);
+                        } else {
+                            $(ele).removeClass().addClass('switch switch-' + btnData);
+                        }
+                    }
+
+                });
+                buttons.removeClass().addClass('button btn-' + btnData);
+            });
+
+            setTimeout(function () {
+                adminForm.addClass('theme-primary');
+                Panel.addClass('panel-primary');
+                pageHeader.addClass('text-primary');
+
+                $(options).each(function (i, e) {
+                    if ($(e).hasClass('block')) {
+                        $(e).removeClass().addClass('block mt15 option option-primary');
+                    } else {
+                        $(e).removeClass().addClass('option option-primary');
+                    }
+                });
+
+                // var sliders = $('.ui-timepicker-div', adminForm).find('.ui-slider');
+                $('body').find('.ui-slider').each(function (i, e) {
+                    $(e).addClass('slider-primary');
+                });
+
+                $(switches).each(function (i, ele) {
+                    if ($(ele).hasClass('switch-round')) {
+                        if ($(ele).hasClass('block')) {
+                            $(ele).removeClass().addClass('block mt15 switch switch-round switch-primary');
+                        } else {
+                            $(ele).removeClass().addClass('switch switch-round switch-primary');
+                        }
+                    } else {
+                        if ($(ele).hasClass('block')) {
+                            $(ele).removeClass().addClass('block mt15 switch switch-primary');
+                        } else {
+                            $(ele).removeClass().addClass('switch switch-primary');
+                        }
+                    }
+                });
+                buttons.removeClass().addClass('button btn-primary');
+            }, 800);
+
+
+
+        });
+    </script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+
+            "use strict";
+
+            // Init Theme Core
+            Core.init();
+
+            // Init Demo JS
+            Demo.init();
+
+
+
+            // Init Twitter Typeahead.js
+            var substringMatcher = function (strs) {
+                return function findMatches(q, cb) {
+                    var matches, substrRegex;
+
+                    // an array that will be populated with substring matches
+                    matches = [];
+
+                    // regex used to determine if a string contains the substring `q`
+                    substrRegex = new RegExp(q, 'i');
+
+                    // iterate through the pool of strings and for any string that
+                    // contains the substring `q`, add it to the `matches` array
+                    $.each(strs, function (i, str) {
+                        if (substrRegex.test(str)) {
+                            // the typeahead jQuery plugin expects suggestions to a
+                            // JavaScript object, refer to typeahead docs for more info
+                            matches.push({
+                                value: str
+                            });
+                        }
+                    });
+
+                    cb(matches);
+                };
+            };
+
+            var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+                'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+                'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+                'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+                'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+                'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+                'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+                'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+                'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+            ];
+
+            // Init Typeahead Plugin with state aray
+            //$('.typeahead').typeahead({
+            //  hint: true,
+            //  highlight: true,
+            //  minLength: 1
+            //}, {
+            //  name: 'states',
+            //  displayKey: 'value',
+            //  source: substringMatcher(states)
+            //});
+
+            $('.typeahead').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 1
+            },
+                {
+                    name: 'states',
+                    displayKey: 'value',
+                    source: function (request, response) {
+                        // var r = request.tre;
+                        var res = request.split(" ");
+                        $.ajax({
+                            url: '/visitors/WebService.asmx/GetCustomers',
+                            data: "{ 'prefix': '" + res[res.length - 1] + "'}",
+                            dataType: "json",
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {
+                                response($.map(data.d, function (item) {
+                                    return {
+                                        value: item.split('-')[0],
+                                        id: item.split('-')[1]
+                                    }
+                                }))
+                            },
+                            error: function (response) {
+                                alert(response.responseText);
+                            },
+                            failure: function (response) {
+                                alert(response.responseText);
+                            }
+                        });
+                    }
+                });
+        });
+    </script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+
+            "use strict";
+
+            // Init Theme Core    
+            Core.init();
+
+            // Init Demo JS    
+            Demo.init();
+
+            // Toggle single item timeline style
+            $('#timeline-toggle').on('click', function () {
+                $('#timeline').toggleClass('timeline-single');
+                Holder.run();
+            });
+
+            // Attach debounced resize handler
+            var rescale = function () {
+                if ($(window).width() < 1250) {
+                    $('#timeline').addClass('timeline-single');
+                    $('#timeline-toggle').hide();
+                } else {
+                    $('#timeline').removeClass('timeline-single');
+                    $('#timeline-toggle').show();
+                }
+                Holder.run();
+            }
+            var lazyLayout = _.debounce(rescale, 300);
+
+            // convert to single timeline if under 1250px on load/resize
+            $(window).resize(lazyLayout);
+            rescale();
+
+            // All of the event creation forms attached to the timeline
+            var forms = '#timeline-basic-form, #timeline-image-form, #timeline-video-form, #timeline-map-form';
+
+            // Catch Form Submit and pass required variables 
+            // to event creation function
+            $(forms).submit(function (e) {
+                var This = $(this);
+                createEvent(e, This);
+            });
+
+            // unique ID counter for Panel Clones
+            var counter = 0;
+
+            function createEvent(e, This) {
+                e.preventDefault();
+                // shared event field data
+                var eventTitle = This.find('.event-name').val(),
+                    eventDate = This.find('.datepicker').val();
+
+                if (eventTitle == '') {
+                    var eventTitle = "Example Title";
+                }
+                if (eventDate == '') {
+                    var eventDate = "01/01/2014";
+                }
+
+                // The form creation panel simply collects data from the user
+                // proccesses it and then creates a new panel to place it in.
+                // That new panel is simply a clone of one which already exists.
+                var clone = $('#clone').clone(true).attr('id', 'clone-' + counter).removeClass('panel-clone');
+                clone.find('.panel-heading .panel-title').text(eventTitle);
+                clone.find('.panel-heading .panel-date').text(eventDate)
+
+                // append clone to container and display it
+                var setClone = function setClone() {
+                    clone.insertAfter(This.parents('.timeline-item')).hide();
+                    clone.fadeIn();
+                    This[0].reset();
+                }
+
+                // unique event field data
+                var id = This.attr('id');
+
+                switch (id) {
+                    case 'timeline-basic-form':
+                        var eventDesc = This.find('.event-desc').val();
+                        clone.find('.panel-body p').text(eventDesc);
+                        setClone()
+                        break;
+                    case 'timeline-image-form':
+                        var eventImage = This.find('.fileupload-preview img').clone().addClass('img-responsive');
+                        clone.find('.panel-body p').html(eventImage);
+                        setClone()
+                        break;
+                    case 'timeline-video-form':
+                        // cache form value
+                        var eventVideo = This.find('.event-video').val();
+                        // Create responsive iframe wrapper
+                        var eventCont = clone.find('.panel-body').html('<div class="embed-responsive embed-responsive-16by9"></div>');
+                        // Fill container with iframe url from eventVideo Val
+                        eventCont.find('.embed-responsive').html(eventVideo);
+                        setClone()
+                        break;
+                    case 'timeline-map-form':
+                        // cache form value
+                        var eventMap = This.find('.event-map').val();
+                        // Create responsive iframe wrapper
+                        var eventCont = clone.find('.panel-body').html('<div class="embed-responsive embed-responsive-16by9"></div>');
+                        // Fill container with iframe url from eventVideo Val
+                        eventCont.find('.embed-responsive').html(eventMap);
+                        setClone()
+                        break;
+                }
+                // add to unique ID counter
+                counter++;
+            }
+
+            // Init Admin plugins
+            $(".datepicker").datepicker({
+                numberOfMonths: 1,
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+                showButtonPanel: false,
+                beforeShow: function (input, inst) {
+                    var newclass = 'admin-form';
+                    var themeClass = $(this).parents('.admin-form').attr('class');
+                    var smartpikr = inst.dpDiv.parent();
+                    if (!smartpikr.hasClass(themeClass)) {
+                        inst.dpDiv.wrap('<div class="' + themeClass + '"></div>');
+                    }
+                }
+            });
+
+            // Init Misc plugins
+            $('a.gallery-item').magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: true
+                }
+            });
+
+            // Demo purposes. Runs holder.js (temp images) after 
+            // a tab has been clicked. Fixes content hidden bug
+            $('a[data-toggle="tab"]').click(function () {
+                var tabDelay = setTimeout(function () {
+                    Holder.run();
+                }, 20);
+            });
+
+        });
+    </script>
+    
+
+</body>
+
+</html>
+

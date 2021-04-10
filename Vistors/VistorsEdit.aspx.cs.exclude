@@ -1,0 +1,218 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Vistors
+{
+    public partial class Vistors_VistorsEdit : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // Response.Redirect(imageName.Text.ToString());
+            try
+            {
+                if (!IsPostBack)
+                {
+                    getAllCountries();
+                    if (Request.Cookies["UserGender"] == null && Request.Cookies["UserGender"].ToString().Equals(string.Empty))
+                    {
+                        Response.Redirect("~/Login.aspx?page=" + Request.RawUrl, false);
+                    }
+
+                    if (Request["ID"] != null && !string.IsNullOrEmpty(Request["ID"].ToString()))
+                    {
+                        getData();
+                    }
+                    else
+                    {
+                        Response.Redirect("/visitors/Error.aspx");
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.LogError(ex);
+                Response.Redirect("/visitors/Error.aspx");
+            }
+        }
+        private void getData()
+        {
+            VisitorsDataContext obj = new VisitorsDataContext();
+            var q = obj.VistorsSearch(int.Parse(Request["ID"].ToString()), null, null, null, null).Single<VistorsSearchResult>();
+            txtName.Text = q.Name;
+            txtMobile.Text = q.Mobile;
+            txtIDNum.Text = q.NationalID;
+            ddlCountries.SelectedIndex = obj.CountriesSearch(q.CountryID).Single<CountriesSearchResult>().CountryID;
+            if (q.Gender == true)
+            {
+                rbMale.Checked = true;
+            }
+            else
+            {
+                rbFemale.Checked = true;
+            }
+            if (q.alternativeIDType != 0)
+            {
+                ckAlternativeID.Checked = true;
+                ddlAlternativeIDType.SelectedValue = q.alternativeIDType.ToString();
+                divNID.Visible = false;
+                divtxtAlternativeID.Visible = true;
+                divddlAlternativeIDType.Visible = true;
+                txtAlternativeID.Text = q.AlternativeID;
+            }
+        }
+
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            int? result = null;
+            try
+            {
+                result = edit();
+            }
+            catch (Exception ex)
+            {
+                Helper.LogError(ex);
+                result = -2;
+            }
+            finally
+            {
+                if (result == 1)
+                {
+
+                    DivMsg.Visible = true;
+                    DivMsg.Attributes.Add("class", "alert alert-success alert-dismissable");
+                    pDivNotifiDesc.Text = "تم اضافة الزائر بنجاح";
+                    Session["vistorAdd"] = "Success";
+                    Response.Redirect("/visitors/visitors/CheckIn.aspx");
+
+                }
+                else if (result == -2)
+                {
+                    DivMsg.Visible = true;
+                    DivMsg.Attributes.Add("class", "alert alert-danger  alert-dismissable");
+                    pDivNotifiDesc.Text = "خطأ ! عذرا اتصل بمسؤول النظام";
+                }
+                else if (result == -3)
+                {
+                    DivMsg.Visible = true;
+                    DivMsg.Attributes.Add("class", "alert alert-danger  alert-dismissable");
+                    pDivNotifiDesc.Text = "خطأ ! عذرا اعد تحميل الصورة";
+                }
+                getData();
+            }
+        }
+
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                getData();
+            }
+            catch (Exception ex)
+            {
+                Helper.LogError(ex);
+                Response.Redirect("/visitors/Error.aspx");
+            }
+
+        }
+
+        protected void ckAlternativeID_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckAlternativeID.Checked)
+            {
+                divNID.Visible = false;
+                divtxtAlternativeID.Visible = true;
+                divddlAlternativeIDType.Visible = true;
+            }
+            else
+            {
+                divNID.Visible = true;
+                divtxtAlternativeID.Visible = false;
+                divddlAlternativeIDType.Visible = false;
+            }
+        }
+
+        private void getAllCountries()
+        {
+            try
+            {
+                var query = new VisitorsDataContext().GetAllCountries().ToList<GetAllCountriesResult>();
+
+
+                ddlCountries.DataTextField = "CountryName";
+                ddlCountries.DataValueField = "CountryID";
+                ddlCountries.DataSource = query;
+                ddlCountries.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+                Helper.LogError(ex);
+                Response.Redirect("/visitors/Error.aspx");
+            }
+        }
+        private int? edit()
+        {
+            VisitorsDataContext objDateContext = new VisitorsDataContext();
+            int? result = null;
+            int? id = null;
+            bool gender;
+            if (rbMale.Checked)
+            {
+                gender = true;
+            }
+            else
+            {
+                gender = false;
+            }
+            if (ckAlternativeID.Checked)
+            {
+                if (txtAlternativeID.Text.Trim().Equals(string.Empty))
+                {
+                    txtAlternativeIDError.Visible = true;
+                }
+                else
+                {
+                    // in case with scanner image to check that image save on server correctly
+
+
+                    objDateContext.VistorsEdit(int.Parse(Request["ID"].ToString()), txtIDNum.Text.ToString(), txtName.Text.ToString(), gender, "", txtMobile.Text.ToString(), Request.Cookies["UserWebsiteId"].Value.ToString(), DateTime.Now, txtAlternativeID.Text, int.Parse(ddlAlternativeIDType.SelectedValue), int.Parse(ddlCountries.SelectedValue), ref result);
+
+                    List<string> names = txtName.Text.ToString().Split(' ').ToList<string>();
+                    foreach (var item in names)
+                    {
+                        try
+                        {
+                            int? result2 = null;
+                            objDateContext.NamesAdd(item, ref result2);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                }
+            }
+            else
+            {
+                objDateContext.VistorsEdit(int.Parse(Request["ID"].ToString()), txtIDNum.Text.ToString(), txtName.Text.ToString(), gender, "", txtMobile.Text.ToString(), Request.Cookies["UserWebsiteId"].Value.ToString(), DateTime.Now, null, 0, int.Parse(ddlCountries.SelectedValue), ref result);
+                List<string> names = txtName.Text.ToString().Split(' ').ToList<string>();
+                foreach (var item in names)
+                {
+                    try
+                    {
+                        int? result2 = null;
+                        objDateContext.NamesAdd(item, ref result2);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
+            return result;
+        }
+    }
+}

@@ -1,0 +1,220 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="VistorsAdd.aspx.cs" Inherits="Vistors.Vistors_VistorsAdd" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+   <%-- <script type="text/javascript">
+        function onSilverlightError(sender, args) {
+            var appSource = "";
+            if (sender != null && sender != 0) {
+                appSource = sender.getHost().Source;
+            }
+
+            var errorType = args.ErrorType;
+            var iErrorCode = args.ErrorCode;
+
+            if (errorType == "ImageError" || errorType == "MediaError") {
+                return;
+            }
+
+            var errMsg = "Unhandled Error in Silverlight Application " + appSource + "\n";
+
+            errMsg += "Code: " + iErrorCode + "    \n";
+            errMsg += "Category: " + errorType + "       \n";
+            errMsg += "Message: " + args.ErrorMessage + "     \n";
+
+            if (errorType == "ParserError") {
+                errMsg += "File: " + args.xamlFile + "     \n";
+                errMsg += "Line: " + args.lineNumber + "     \n";
+                errMsg += "Position: " + args.charPosition + "     \n";
+            }
+            else if (errorType == "RuntimeError") {
+                if (args.lineNumber != 0) {
+                    errMsg += "Line: " + args.lineNumber + "     \n";
+                    errMsg += "Position: " + args.charPosition + "     \n";
+                }
+                errMsg += "MethodName: " + args.methodName + "     \n";
+            }
+
+            throw new Error(errMsg);
+        }
+    </script>--%>
+    <script type="text/javascript">
+
+        function storeContent() {
+            $('#<%= hiddenContentField.ClientID %>').val($('#contents').html());
+        }
+    </script>
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <!-- Start: Content-Wrapper -->
+    <section id="content_wrapper">
+        <div id="DivMsg" runat="server" visible="false">
+            <i class="fa fa-remove pr10"></i>
+            <asp:Label runat="server" ID="pDivNotifiDesc"></asp:Label>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        </div>
+        <!-- Begin: Content -->
+        <section id="content" class="table-layout animated fadeIn">
+
+            <!-- begin: .tray-center -->
+            <div class="tray tray-center">
+
+                <!-- Begin: Content Header -->
+                <div class="content-header">
+                    <h2>إضافة <b>زائر </b>جديد</h2>
+                </div>
+
+                <!-- Validation Example -->
+                <div class="admin-form theme-primary mw1000 center-block">
+
+                    <div class="panel heading-border">
+
+                        <form method="post" runat="server" id="adminform">
+
+                            <div class="panel-body bg-light">
+
+                                <div class="section-divider mt20 mb40">
+                                    <span>من فضلك ادخل المعلومات المطلوبة </span>
+                                </div>
+                                <!-- .section-divider -->
+
+                                <div class="section row" id="spy1">
+
+                                    <div class="col-md-5" id="divtxtAlternativeID" runat="server" visible="false">
+                                        <label class="field prepend-icon">
+                                            <asp:TextBox ID="txtAlternativeID" runat="server" CssClass="gui-input" placeholder="رقم البطاقة"></asp:TextBox>
+                                            <label for="firstname" class="field-icon">
+                                                <i class="fa fa-id-card-o"></i>
+                                            </label>
+                                        </label>
+                                        <asp:Label ID="txtAlternativeIDError" runat="server" Font-Size="0.85em" ForeColor="#de888a" Text="من فضلك ادخل رقم البطاقة" Visible="false"></asp:Label>
+                                    </div>
+                                    <div class="col-md-5" id="divddlAlternativeIDType" runat="server" visible="false">
+
+                                        <label class="field select">
+                                            <asp:DropDownList ID="ddlAlternativeIDType" runat="server">
+                                                <asp:ListItem Text="جواز سفر" Value="1" Selected="True"></asp:ListItem>
+                                                <asp:ListItem Text="بطاقة عمل" Value="2"></asp:ListItem>
+                                                <asp:ListItem Text="تصريح اخر" Value="3"></asp:ListItem>
+                                            </asp:DropDownList>
+                                        </label>
+                                    </div>
+                                    <div runat="server" id="divNID">
+                                        <div class="col-md-10">
+
+                                            <label for="IDNum" class="field prepend-icon">
+                                                <asp:TextBox runat="server" name="firstname" ID="txtIDNum" class="gui-input " placeholder="رقم الهوية..."></asp:TextBox>
+                                                <label for="txtIDNum" class="field-icon">
+                                                    <i class="fa fa-id-card-o" style="color: red"></i>
+                                                </label>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <div class="option ">
+                                            <label class="option option-primary">
+                                                <asp:CheckBox ID="ckAlternativeID" runat="server" Checked="false" OnCheckedChanged="ckAlternativeID_CheckedChanged" AutoPostBack="true" />
+                                                <span class="checkbox"></span>بطاقة اخرى
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <label for="name" class="field prepend-icon">
+                                        <asp:TextBox runat="server" type="text" name="name" ID="txtName" class="gui-input typeahead" placeholder="الإسم الثلاثي..."></asp:TextBox>
+                                        <label for="txtName" class="field-icon">
+                                            <i class="fa fa-user" style="color: red"></i>
+                                        </label>
+                                    </label>
+                                </div>
+
+                                <div class="section">
+                                    <label class="field select">
+                                        <asp:DropDownList ID="ddlCountries" runat="server">
+                                        </asp:DropDownList>
+                                    </label>
+                                </div>
+                                <div class="section ">
+                                    <label for="mobile" class="field prepend-icon">
+                                        <asp:TextBox runat="server" name="mobile" ID="txtMobile" class="gui-input" placeholder="رقم الجوال"></asp:TextBox>
+                                        <label for="txtMobile" class="field-icon">
+                                            <i class="glyphicon glyphicon-phone "></i>
+                                        </label>
+                                    </label>
+                                </div>
+                                <!-- end section -->
+                                <div id="silverlightControlHost" class="section row">
+
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <label class="control-label " style="text-align: right; float: right">الجنس</label>
+                                            <div class="form-group">
+                                                <div class="col-sm-12 pl15">
+
+                                                    <div class="radio-custom square radio-info mb5 ml5" style="float: right">
+                                                        <input runat="server" type="radio" id="rbMale" checked="true" name="radioExample" />
+                                                        <label for="ContentPlaceHolder1_rbMale">ذكر</label>
+                                                    </div>
+                                                    <div class="radio-custom square radio-alert mb5  " style="float: right">
+                                                        <input runat="server" type="radio" id="rbFemale" name="radioExample" />
+                                                        <label for="ContentPlaceHolder1_rbFemale">انثي</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt25">
+                                            <div class="text-right">
+                                                <asp:Button runat="server" ID="btnSave" type="submit" class="btn active btn-success btn-blocky valid" Text="حفظ" OnClick="btnSave_Click" OnClientClick="storeContent();"></asp:Button>
+                                                <asp:Button runat="server" ID="btnReset" type="reset" class="button valid" Text="إلغاء" OnClick="btnReset_Click"></asp:Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%--<div class="col-md-6">
+                                        <object data="data:application/x-silverlight-2," type="application/x-silverlight-2" height="450" style="width: 100%; border: 1px solid #ddd; margin: 1px; float: right">
+                                            <param name="source" value="/ClientBin/SilverlightApplication1.xap" />
+                                            <param name="onError" value="onSilverlightError" />
+                                            <param name="minRuntimeVersion" value="5.0.61118.0" />
+                                            <param name="autoUpgrade" value="true" />
+                                            <a href="http://go.microsoft.com/fwlink/?LinkID=149156&v=5.0.61118.0" style="text-decoration: none">
+                                                <img src="http://go.microsoft.com/fwlink/?LinkId=161376" alt="Get Microsoft Silverlight" style="border-style: none" />
+                                            </a>
+                                        </object>
+                                        <iframe id="_sl_historyFrame" style="visibility: hidden; height: 0px; width: 0px; border: 2px black solid"></iframe>
+
+                                    </div>--%>
+
+                                </div>
+
+
+                                <div id="contents" style="visibility: hidden"></div>
+                                <asp:HiddenField ID="hiddenContentField" runat="server" />
+
+                                <!-- end section -->
+                                <!-- end .section section -->
+                            </div>
+                            <!-- end .form-body section -->
+
+                            <!-- end .form-footer section -->
+                        </form>
+
+                    </div>
+
+                </div>
+                <!-- end: .admin-form -->
+
+            </div>
+            <!-- end: .tray-center -->
+
+
+        </section>
+        <!-- End: Content -->
+
+    </section>
+
+
+
+
+
+</asp:Content>
+

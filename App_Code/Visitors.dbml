@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Visitors" Class="VisitorsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=Visitors;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="VisitorsConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.CheckOutAllVistorsDailyTask" Method="CheckOutAllVistorsDailyTask">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.DepartmentsSearch" Method="DepartmentsSearch">
+    <Parameter Name="Department_id" Parameter="department_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="DepartmentsSearchResult">
+      <Column Name="Department_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Department_Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Department_Domain" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Creation_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Priority" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.DependentsAdd" Method="DependentsAdd">
+    <Parameter Name="DependentName" Parameter="dependentName" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="DependentGeneder" Parameter="dependentGeneder" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="TransactionID" Parameter="transactionID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Result" Parameter="result" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetAllAltIDTypes" Method="GetAllAltIDTypes">
+    <ElementType Name="GetAllAltIDTypesResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="typeAr" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="typeEn" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetAllDepartments" Method="GetAllDepartments">
+    <ElementType Name="GetAllDepartmentsResult">
+      <Column Name="Department_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Department_Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Department_Domain" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Creation_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Department_Name_En" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Priority" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetAllUsers" Method="GetAllUsers">
+    <ElementType Name="GetAllUsersResult">
+      <Column Name="UserID" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="UserRole" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserIsLocked" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UserGender" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreationDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetDaysTransctions" Method="GetDaysTransctions">
+    <Parameter Name="StartDate" Parameter="startDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="endDate" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="GetDaysTransctionsResult">
+      <Column Name="TransactionCreationDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Male" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Female" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Per1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Per2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Per3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Per4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Per5" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Per6" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Per7" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Per8" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Per9" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Per10" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Per11" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Total" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.getLastTransaction" Method="getLastTransaction">
+    <Parameter Name="VistorID" Parameter="vistorID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="getLastTransactionResult">
+      <Column Name="Statues" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.IsValidUser" Method="IsValidUser">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="IsValidUserResult">
+      <Column Name="UserID" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="UserRole" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserIsLocked" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UserGender" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreationDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.LogErrorsAdd" Method="LogErrorsAdd">
+    <Parameter Name="ExceptionMsg" Parameter="exceptionMsg" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="ExceptionType" Parameter="exceptionType" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="ExceptionStackTrace" Parameter="exceptionStackTrace" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="ExceptionURL" Parameter="exceptionURL" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NamesAdd" Method="NamesAdd">
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Result" Parameter="result" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NamesEdit" Method="NamesEdit">
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="numberOfUse" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NamesSearch" Method="NamesSearch">
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="NamesSearchResult">
+      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.PublicSearch" Method="PublicSearch">
+    <Parameter Name="AlternativeID" Parameter="alternativeID" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="PublicSearchResult">
+      <Column Name="Name" Type="System.String" DbType="NChar(250)" CanBeNull="true" />
+      <Column Name="UserID" Type="System.String" DbType="NChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileNo" Type="System.String" DbType="NChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="CivilId" Type="System.String" DbType="NChar(256)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="LastModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Country" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="VisitorID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.TransationsCreate" Method="TransationsCreate">
+    <Parameter Name="VistorID" Parameter="vistorID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CreationDate" Parameter="creationDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Statues" Parameter="statues" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Note" Parameter="note" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="NumberOfDependents" Parameter="numberOfDependents" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Department" Parameter="department" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Return" Parameter="return" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UserIsLockedEdit" Method="UserIsLockedEdit">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UsersAdd" Method="UsersAdd">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="UserRole" Parameter="userRole" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="UserGender" Parameter="userGender" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Result" Parameter="result" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UsersDelete" Method="UsersDelete">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UsersEdit" Method="UsersEdit">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="UserRole" Parameter="userRole" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="UserGender" Parameter="userGender" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Result" Parameter="result" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UsersSearch" Method="UsersSearch">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="UsersSearchResult">
+      <Column Name="UserID" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="UserRole" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserIsLocked" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UserGender" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreationDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.VistorsAdd" Method="VistorsAdd">
+    <Parameter Name="NationalID" Parameter="nationalID" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="Gender" Parameter="gender" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="NationalIDImg" Parameter="nationalIDImg" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Mobile" Parameter="mobile" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="CreatedBy" Parameter="createdBy" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="EditedBy" Parameter="editedBy" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="EditDate" Parameter="editDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="AlternativeID" Parameter="alternativeID" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="alternativeIDType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CountryID" Parameter="countryID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Result" Parameter="result" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.VistorsDelete" Method="VistorsDelete">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.VistorsEdit" Method="VistorsEdit">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Parameter Name="NationalID" Parameter="nationalID" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="Gender" Parameter="gender" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="NationalIDImg" Parameter="nationalIDImg" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Mobile" Parameter="mobile" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="EditedBy" Parameter="editedBy" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="EditDate" Parameter="editDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="AlternativeID" Parameter="alternativeID" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="alternativeIDType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CountryID" Parameter="countryID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Result" Parameter="result" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.VistorsSearch" Method="VistorsSearch">
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="NChar(250)" />
+    <Parameter Name="MobileNo" Parameter="mobileNo" Type="System.String" DbType="NChar(256)" />
+    <Parameter Name="CivilId" Parameter="civilId" Type="System.String" DbType="NChar(256)" />
+    <Parameter Name="Gender" Parameter="gender" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="VisitorID" Parameter="visitorID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="VistorsSearchResult">
+      <Column Name="Name" Type="System.String" DbType="NChar(250)" CanBeNull="true" />
+      <Column Name="UserID" Type="System.String" DbType="NChar(256)" CanBeNull="true" />
+      <Column Name="MobileNo" Type="System.String" DbType="NChar(256)" CanBeNull="true" />
+      <Column Name="CivilId" Type="System.String" DbType="NChar(256)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="LastModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Country" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="VisitorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.VistorTacking" Method="VistorTacking">
+    <Parameter Name="VistorID" Parameter="vistorID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StartDate" Parameter="startDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="EndDate" Parameter="endDate" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="VistorTackingResult">
+      <Column Name="VistorName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Statues" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Department" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TransactionCreationDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="NumberOfDependents" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetCheckInVistors" Method="GetCheckInVistors">
+    <Parameter Name="Gender" Parameter="gender" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="GetCheckInVistorsResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="st" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UserID" Type="System.String" DbType="NChar(256)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MobileNo" Type="System.String" DbType="NChar(256)" CanBeNull="true" />
+      <Column Name="CivilId" Type="System.String" DbType="NChar(256)" CanBeNull="true" />
+      <Column Name="VisitorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.getVistorsGroupByID" Method="getVistorsGroupByID">
+    <Parameter Name="Vistor_ID1" Parameter="vistor_ID1" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="vistor_ID2" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="vistor_ID3" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="vistor_ID4" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="vistor_ID5" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="vistor_ID6" Type="System.String" DbType="VarChar(255)" />
+    <ElementType Name="getVistorsGroupByIDResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VistorID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="NationalID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="NationalIDImg" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Mobile" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AlternativeID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="alternativeIDType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EditedBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CountryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EditDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CreationDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CountryName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="typeAr" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

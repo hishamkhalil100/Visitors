@@ -151,7 +151,7 @@
     <value>Error</value>
   </data>
   <data name="errorSearchMsg" xml:space="preserve">
-    <value>Please Enter Valid ID</value>
+    <value>Please Enter Valid ID or make that your ID is registered on KFNL portal in your account</value>
   </data>
   <data name="errorValidationMsg" xml:space="preserve">
     <value>Sorry, please book an appointment </value>

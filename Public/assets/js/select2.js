@@ -5638,7 +5638,7 @@
                 });
 
                 this.on('blur', function () {
-                    self.$container.removeClass('select2-container--focus');
+                    self.$container.removeClass('select2-container-focus');
                 });
 
                 this.on('query', function (params) {
@@ -5825,7 +5825,7 @@
             };
 
             Select2.prototype.hasFocus = function () {
-                return this.$container.hasClass('select2-container--focus');
+                return this.$container.hasClass('select2-container-focus');
             };
 
             Select2.prototype.focus = function (data) {
@@ -5834,7 +5834,7 @@
                     return;
                 }
 
-                this.$container.addClass('select2-container--focus');
+                this.$container.addClass('select2-container-focus');
                 this.trigger('focus', {});
             };
 

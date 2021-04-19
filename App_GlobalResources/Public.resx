@@ -157,7 +157,7 @@
     <value>عفوا! لم يتم حجز موعد</value>
   </data>
   <data name="existID" xml:space="preserve">
-    <value> رقم الهوية مدخل من قبل الرجاء إغلاق هذه النافذة والظغط علي زر تسجيل دخول زائر</value>
+    <value>من فضلك ادخل رقم هوية صحيح او التأكد من تسجيل رقم الهوية في الحساب الخاص بكم في بوابة مكتبة الملك فهد الوطنية</value>
   </data>
   <data name="female" xml:space="preserve">
     <value>انثي</value>

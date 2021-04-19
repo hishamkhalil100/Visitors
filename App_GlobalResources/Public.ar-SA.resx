@@ -154,7 +154,7 @@
     <value>خطأ</value>
   </data>
   <data name="errorSearchMsg" xml:space="preserve">
-    <value>من فضلك ادخل رقم هوية صحيح</value>
+    <value>من فضلك ادخل رقم هوية صحيح او التأكد من تسجيل رقم الهوية في الحساب الخاص بكم في بوابة مكتبة الملك فهد الوطنية</value>
   </data>
   <data name="errorValidationMsg" xml:space="preserve">
     <value>عفوا! لم يتم حجز موعد</value>

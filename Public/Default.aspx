@@ -228,7 +228,7 @@
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <input id="txtNumberOfDependents" runat="server" type="text" min="0" max="100" class="required form-control" placeholder="<%$ Resources :Public, numberOfcompanions%>" />
+                                                                <input id="txtNumberOfDependents" runat="server" type="text" min="0" max="100" value="0" class="required form-control" placeholder="<%$ Resources :Public, numberOfcompanions%>" />
                                                             </div>
                                                             <div id="divDependents"></div>
                                                         </div>
